@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Liquor Store</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Liquor Store</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('add_liquor') }}">Add Liquor</a></li>
+            <li><a href="{{ url_for('delete_liquor') }}">Delete Liquor</a></li>
+            <li><a href="{{ url_for('view_liquors') }}">View All Liquors</a></li>
+        </ul>
+    </nav>
+    <footer>
+        <p>&copy; 2024 Liquor Store</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
