@@ -1,140 +1,62 @@
-from app import create_app, db
-from app.models import Category, Product
+import sys
+from models import Liquor, db
+from config import Config
+from flask import Flask
 
-app = create_app()
+app = Flask(__name__)
+app.config.from_object(Config)
+db.init_app(app)
 
-def main_menu():
-    print("Welcome to the Liquor Store CLI")
-    while True:
-        print("1. Manage Categories")
-        print("2. Manage Products")
-        print("3. Exit")
-        choice = input("Enter your choice: ")
-        if choice == '1':
-            manage_categories()
-        elif choice == '2':
-            manage_products()
-        elif choice == '3':
-            break
-        else:
-            print("Invalid choice. Please try again.")
+def display_menu():
+    print("1. Add Liquor")
+    print("2. Delete Liquor")
+    print("3. View All Liquors")
+    print("4. Find Liquor by Name")
+    print("5. Exit")
 
-def manage_categories():
-    while True:
-        print("\nManage Categories")
-        print("1. Create Category")
-        print("2. Delete Category")
-        print("3. Display All Categories")
-        print("4. Find Category by Name")
-        print("5. Back to Main Menu")
-        choice = input("Enter your choice: ")
-        if choice == '1':
-            create_category()
-        elif choice == '2':
-            delete_category()
-        elif choice == '3':
-            display_all_categories()
-        elif choice == '4':
-            find_category_by_name()
-        elif choice == '5':
-            break
-        else:
-            print("Invalid choice. Please try again.")
+def add_liquor():
+    name = input("Enter liquor name: ")
+    category = input("Enter category: ")
+    price = float(input("Enter price: "))
+    stock = int(input("Enter stock quantity: "))
+    Liquor.create(name, category, price, stock)
+    print("Liquor added successfully!")
 
-def create_category():
-    name = input("Enter category name: ")
-    if Category.query.filter_by(name=name).first():
-        print(f"Category '{name}' already exists.")
+def delete_liquor():
+    name = input("Enter liquor name to delete: ")
+    Liquor.delete_by_name(name)
+    print("Liquor deleted successfully!")
+
+def view_all_liquors():
+    liquors = Liquor.get_all()
+    for liquor in liquors:
+        print(f"Name: {liquor.name}, Category: {liquor.category}, Price: {liquor.price}, Stock: {liquor.stock}")
+
+def find_liquor():
+    name = input("Enter liquor name to find: ")
+    liquor = Liquor.find_by_name(name)
+    if liquor:
+        print(f"Name: {liquor.name}, Category: {liquor.category}, Price: {liquor.price}, Stock: {liquor.stock}")
     else:
-        new_category = Category(name=name)
-        db.session.add(new_category)
-        db.session.commit()
-        print(f"Category '{name}' created successfully.")
+        print("Liquor not found")
 
-def delete_category():
-    name = input("Enter category name to delete: ")
-    category = Category.query.filter_by(name=name).first()
-    if category:
-        db.session.delete(category)
-        db.session.commit()
-        print(f"Category '{name}' deleted successfully.")
-    else:
-        print(f"Category '{name}' not found.")
-
-def display_all_categories():
-    categories = Category.query.all()
-    for category in categories:
-        print(category)
-
-def find_category_by_name():
-    name = input("Enter category name: ")
-    category = Category.query.filter_by(name=name).first()
-    if category:
-        print(category)
-    else:
-        print(f"Category '{name}' not found.")
-
-def manage_products():
-    while True:
-        print("\nManage Products")
-        print("1. Create Product")
-        print("2. Delete Product")
-        print("3. Display All Products")
-        print("4. Find Product by Name")
-        print("5. Back to Main Menu")
-        choice = input("Enter your choice: ")
-        if choice == '1':
-            create_product()
-        elif choice == '2':
-            delete_product()
-        elif choice == '3':
-            display_all_products()
-        elif choice == '4':
-            find_product_by_name()
-        elif choice == '5':
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
-def create_product():
-    name = input("Enter product name: ")
-    price = float(input("Enter product price: "))
-    category_name = input("Enter category name: ")
-    category = Category.query.filter_by(name=category_name).first()
-    if category:
-        if Product.query.filter_by(name=name).first():
-            print(f"Product '{name}' already exists.")
-        else:
-            new_product = Product(name=name, price=price, category=category)
-            db.session.add(new_product)
-            db.session.commit()
-            print(f"Product '{name}' created successfully.")
-    else:
-        print(f"Category '{category_name}' not found.")
-
-def delete_product():
-    name = input("Enter product name to delete: ")
-    product = Product.query.filter_by(name=name).first()
-    if product:
-        db.session.delete(product)
-        db.session.commit()
-        print(f"Product '{name}' deleted successfully.")
-    else:
-        print(f"Product '{name}' not found.")
-
-def display_all_products():
-    products = Product.query.all()
-    for product in products:
-        print(product)
-
-def find_product_by_name():
-    name = input("Enter product name: ")
-    product = Product.query.filter_by(name=name).first()
-    if product:
-        print(product)
-    else:
-        print(f"Product '{name}' not found.")
+def main():
+    with app.app_context():
+        while True:
+            display_menu()
+            choice = input("Enter choice: ")
+            if choice == '1':
+                add_liquor()
+            elif choice == '2':
+                delete_liquor()
+            elif choice == '3':
+                view_all_liquors()
+            elif choice == '4':
+                find_liquor()
+            elif choice == '5':
+                sys.exit()
+            else:
+                print("Invalid choice, please try again")
 
 if __name__ == '__main__':
-    with app.app_context():
-        main_menu()
+    main()
