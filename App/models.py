@@ -1,22 +1,40 @@
-from app import db
+from db import db
 
-class Category(db.Model):
-    __tablename__ = 'categories'
-    
+class Liquor(db.Model):
+    __tablename__ = 'liquors'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    products = db.relationship('Product', backref='category', lazy=True)
-
-    def __repr__(self):
-        return f'<Category {self.name}>'
-
-class Product(db.Model):
-    __tablename__ = 'products'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    category = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    stock = db.Column(db.Integer, nullable=False)
 
-    def __repr__(self):
-        return f'<Product {self.name}>'
+    def __init__(self, name, category, price, stock):
+        self.name = name
+        self.category = category
+        self.price = price
+        self.stock = stock
+
+    @property
+    def stock_value(self):
+        return self.price * self.stock
+
+    @staticmethod
+    def create(name, category, price, stock):
+        liquor = Liquor(name, category, price, stock)
+        db.session.add(liquor)
+        db.session.commit()
+
+    @staticmethod
+    def delete_by_name(name):
+        liquor = Liquor.query.filter_by(name=name).first()
+        if liquor:
+            db.session.delete(liquor)
+            db.session.commit()
+
+    @staticmethod
+    def get_all():
+        return Liquor.query.all()
+
+    @staticmethod
+    def find_by_name(name):
+        return Liquor.query.filter_by(name=name).first()
