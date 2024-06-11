@@ -10,7 +10,7 @@ By  **Gathuku Samwel**
 
 Built with Flask, SQLAlchemy, and MySQL, this project demonstrates an implementation of an e-commerce platform.
 
-Users can view categories and products, with a command-line interface (CLI) for administrative tasks such as creating and managing product categories and individual products.
+MAIN POINT: Users can view categories and products, with a command-line interface (CLI) for administrative tasks such as creating and managing product categories and individual products.
 
 ### Requirements
 
