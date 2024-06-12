@@ -13,6 +13,6 @@ CREATE TABLE products (
     category_id INT,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-CREATE USER 'samwel'@'localhost' IDENTIFIED BY '1996bandana_254';
+
 GRANT ALL PRIVILEGES ON *.* TO 'samwel'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
