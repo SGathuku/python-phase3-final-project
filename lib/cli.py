@@ -1,10 +1,5 @@
-from helpers import (
-    exit_program,
-    list_categories,
-    add_category,
-    list_products,
-    add_product
-)
+from helpers import exit_program, enter_name, enter_price, enter_category
+
 
 def main():
     while True:
@@ -13,27 +8,21 @@ def main():
         if choice == "0":
             exit_program()
         elif choice == "1":
-            list_categories()
+            enter_name()
         elif choice == "2":
-            name = input("Enter the category name: ")
-            add_category(name)
+            enter_price()
         elif choice == "3":
-            list_products()
-        elif choice == "4":
-            name = input("Enter the product name: ")
-            price = input("Enter the product price: ")
-            category_name = input("Enter the category name: ")
-            add_product(name, price, category_name)
+            enter_category()
         else:
             print("Invalid choice")
 
 def menu():
     print("Please select an option:")
     print("0. Exit the program")
-    print("1. List categories")
-    print("2. Add a category")
-    print("3. List products")
-    print("4. Add a product")
+    print("1. Enter name of liquor: ")
+    print("2. Enter price of liquor: ")
+    print("3. Enter category of liquor:")
+
 
 if __name__ == "__main__":
     main()

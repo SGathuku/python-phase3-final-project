@@ -1,26 +1,19 @@
-# FEEL THE VIBE ONLINE LIQUOR STORE
+# LIQUOR STORE MANAGEMENT SYSTEM
 
-A SIMPLE PYTHON APPLICATION THAT ONE CAN PURCHASE LIQUOR FROM THE INTERNET THAT IMPLEMENTS HTML, CSS AND JAVASCRIPT LANGUAGES. TOGETHER WITH CLI(Command Line Interface)
+This is a simple command-line application for managing a liquor store inventory. It allows the user to enter the name, price, and category of different liquors and stores this information in an SQLite database.
 
 By  **Gathuku Samwel**
 
 ## Project Description
 
-"FEEL THE VIBE" Online Liquor Store is a dynamic web application for managing and purchasing liquor products.
-
-Built with Flask, SQLAlchemy, and MySQL, this project demonstrates an implementation of an e-commerce platform.
-
-MAIN POINT: Users can view categories and products, with a command-line interface (CLI) for administrative tasks such as creating and managing product categories and individual products.
+* The Liquor Store Management System is a command-line application designed to help manage the inventory of a liquor store.
+* This simple and user-friendly tool allows users to enter details about liquors, including their names, prices, and categories, and stores this information in an SQLite database for persistent storage.
+* The system provides a menu-driven interface where users can easily add new liquor entries and update existing ones. This project is ideal for small liquor store owners or managers who need an efficient way to keep track of their stock.
 
 ### Requirements
 
-* A computer with a bash terminal and all necessary dependencies and application installed.
-
-* Python: Ensure you have Python 3.8 or higher installed. You can download it from python.org.
-
-* MySQL: Install MySQL server and client. You can download MySQL from mysql.com.
-
-* Pipenv: Install Pipenv for managing the virtual environment and dependencies. You can install Pipenv using pip: "pip install pipenv" on your terminal or editor.
+-Python 3.x
+-SQLite3
 
 ### Installation process
 
@@ -32,48 +25,19 @@ git clone https://github.com/SGathuku/python-phase3-final-project.git
 
 or by downloading a ZIP file of the code.
 
-2. Create and Activate Virtual Environment:
+2.Create the SQLite database:
 
 ```sh
-pipenv install
-pipenv shell
+sqlite3 liquor_store.db < schema.sql
 ```
 
-3. Configure the Database:
-
-* Create a MySQL database:
-
-```sh
-
-mysql -u root -p
-CREATE DATABASE liquor_store;
-```
-
-* Update config.py with your MySQL database credentials:
+3.Install any required Python packages (if any):
 
 ``` python
-SQLALCHEMY_DATABASE_URI = 'mysql://username:password@localhost/liquor_store'
+pipenv install
 ```
 
-4. Initialize the Database:
-
-```sh
-
-flask shell
->>> from app import db
->>> db.create_all()
->>> exit()
-```
-
-5. Run the Web Application:
-
-```sh
-flask run
-```
-
-* Access the application at http://127.0.0.1:5000.
-
-6. Run the CLI:
+4.Run the CLI:
 
 ```sh
 python app/cli.py
@@ -81,34 +45,21 @@ python app/cli.py
 
 ## Features
 
-1) Dynamic Web Interface: User-friendly interface with sliding and stylish background images, ensuring a visually appealing and responsive design.
-
-2) Product and Category Management: View categories and products with the ability to filter by category.
-
-3) CLI for Administrative Tasks:
-
-* Create, delete, and view categories and products.
-* Find products and categories by name.
-* ORM and Database: Utilizes SQLAlchemy for object-relational mapping with a MySQL database backend.
-* Responsive Design: Uses HTML, CSS, and JavaScript to provide a seamless user experience.
+-**Add Liquor Name**: Allows the user to enter and store the name of a liquor.
+-**Add Liquor Price**: Allows the user to enter and store the price of a liquor.
+-**Add Liquor Category**: Allows the user to enter and store the category of a liquor.
+-**Persistent Storage**: Stores all entered data persistently in an SQLite database.
+-**Menu-Driven Interface**: Provides a simple and intuitive menu-driven interface for users to interact with the system.
+-**Data Validation**: Ensures that the input data (such as price) is of the correct type.
+-**Update Existing Entries**: Allows users to update the price and category of the most recently entered liquor.
+-**Exit Program**: Allows users to exit the program gracefully, ensuring that all data is saved and the database connection is closed properly.
 
 ## Technologies Used
 
-Frontend:
-
-1) HTML
-2) CSS
-3) JavaScript
-
-Backend:
-
-1) Python
-2) SQLAlchemy
-3) MySQL
-
-CLI:
-
-1) Python
+-**Python 3.x**: The main programming language used to develop the application. Python is known for its simplicity and readability, making it a great choice for a command-line application.
+-**SQLite3**: A lightweight, disk-based database that doesn’t require a separate server process. SQLite is integrated into the Python standard library, making it easy to use for database operations within a Python application.
+-**sqlite3 Python Module**: This module provides a SQL interface compliant with the DB-API 2.0 specification described by PEP 249. It allows the application to connect to an SQLite database, execute SQL queries, and manage data.
+-**SQL**: The standard language for relational database management and manipulation. SQL is used within the application to create the database schema and perform CRUD (Create, Read, Update, Delete) operations.
 
 ## Support and Contact details
 

@@ -1,53 +1,30 @@
-from liquor_store import Product
+import sqlite3
+from liquor_store import Category
+from product import Product
 
-# CREATING PRODUCT TABLE
+from __init__ import conn, cursor
 
-Product.create_table()
+conn = sqlite3.connect('liquor_store.db')
+cursor = conn.cursor()
 
-Product_table1 = Product.create(
-    name = "Tusker", category= "Beer", price= 250.00
-)
+additional_products = [
+    ("Tusker", "Beer", 250.00),
+    ("Tusker Lite", "Beer", 260.00),
+    ("Tusker Cider", "Beer", 275.00),
+    ("Budweiser", "Beer", 300.00),
+    ("Jack Daniel's Old No.7", "Whiskey", 3864.71),
+    ("Macallan 12 Year Double Cask", "Whiskey", 7730.72),
+    ("Jameson Irish Whiskey", "Whiskey", 4128.00),
+    ("Bulleit Bourbon", "Whiskey", 4129.54),
+    ("Absolut Vodka", "Vodka", 2580.72),
+    ("Grey Goose", "Vodka", 3871.88),
+    ("Belvedere Vodka", "Vodka", 4517.49),
+    ("Ketel One", "Vodka", 3226.42)
+]
 
-Product_table2 = Product.create(
-    name = "Tusker Lite", category= "Beer", price= 260.00
-)
+for product_name, category_name, product_price in additional_products:
+    category = Category.create(category_name)
+    Product.create(product_name, product_price, category.id)
 
-Product_table3 = Product.create(
-    name = "Tusker Cider", category= "Beer", price= 275.00
-)
-
-Product_table4 = Product.create(
-    name = "Budweiser", category= "Beer", price= 300.00
-)
-
-Product_table5 = Product.create(
-    name = "Jack Daniel's OLd No.7", category= "Whiskey", price= 3864.71
-)
-
-Product_table6 = Product.create(
-    name = "Macallan 12 Year Double Cask", category= "Whiskey", price= 7730.72
-)
-
-Product_table7 = Product.create(
-    name = "Jameson Irish Whiskey", category= "Whiskey", price= 4128.00  
-)
-
-Product_table8 = Product.create(
-    name = "Bulleit Bourbon", category= "Whiskey", price= 4129.54
-)
-
-Product_table9 = Product.create(
-    name = "Absolut Vodka", category= "Vodka", price= 2580.72
-)
-
-Product_table10 = Product.create(
-    name = "Grey Goose", category= "Vodka", price= 3871.88  
-)
-
-Product_table11 = Product.create(
-    name = "Belvedere Vodka", category= "Vodka", price= 4517.49
-)
-
-Product_table12 = Product.create(
-    name = "Ketel One", category= "Vodka", price= 3226.42
-)
+conn.commit()
+conn.close()
