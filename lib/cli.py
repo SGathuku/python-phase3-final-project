@@ -15,14 +15,14 @@ def main():
         elif choice == "1":
             list_categories()
         elif choice == "2":
-            name = input("Enter category name: ")
+            name = input("Enter the category name: ")
             add_category(name)
         elif choice == "3":
             list_products()
         elif choice == "4":
-            name = input("Enter product name: ")
-            price = input("Enter product price: ")
-            category_name = input("Enter category name: ")
+            name = input("Enter the product name: ")
+            price = input("Enter the product price: ")
+            category_name = input("Enter the category name: ")
             add_product(name, price, category_name)
         else:
             print("Invalid choice")

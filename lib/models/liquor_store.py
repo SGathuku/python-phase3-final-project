@@ -4,7 +4,8 @@ from sqlalchemy.orm import sessionmaker, relationship
 
 Base = declarative_base()
 
-engine = create_engine('mysql+mysqlconnector://samwel:1996Bandana_254@127.0.0.1:3306/liquor_store')
+engine = create_engine('sqlite:///liquor_store.db')
+
 Session = sessionmaker(bind=engine)
 session = Session()
 
