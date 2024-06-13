@@ -1,7 +1,7 @@
 from .liquor_store import Category, Product
 
 def exit_program():
-    print("Goodbye!")
+    print("Exiting the Program! Don't Drink and Drive!")
     exit()
 
 def enter_name():
