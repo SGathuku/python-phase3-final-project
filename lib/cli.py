@@ -1,5 +1,5 @@
-from helpers import exit_program, enter_name, enter_price, enter_category
-
+from .liquor_store import Category, Product
+from .helpers import exit_program, enter_name, enter_price, enter_category
 
 def main():
     while True:
@@ -22,7 +22,6 @@ def menu():
     print("1. Enter name of liquor: ")
     print("2. Enter price of liquor: ")
     print("3. Enter category of liquor:")
-
 
 if __name__ == "__main__":
     main()

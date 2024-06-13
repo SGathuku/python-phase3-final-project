@@ -1,5 +1,5 @@
 import sqlite3
-from liquor_store import Category
+from lib.liquor_store import Category
 from product import Product
 
 from __init__ import conn, cursor

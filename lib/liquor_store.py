@@ -1,4 +1,4 @@
-from __init__ import conn, cursor
+from lib import conn, cursor
 
 class Category:
     def __init__(self, name, id=None):
@@ -32,17 +32,30 @@ class Category:
         
         return category
 
+    @classmethod
+    def get_all(cls):
+        cursor.execute("SELECT * FROM category")
+        rows = cursor.fetchall()
+        categories = []
+        for row in rows:
+            category = Category(row[1], row[0])
+            categories.append(category)
+        return categories
+
 class Product:
     def __init__(self, name, price, category_id, id=None):
         self.name = name
         self.price = price
         self.category_id = category_id
+        self.id = id
 
     def __repr__(self):
         return f"<Product(name={self.name}, price={self.price}, category_id={self.category_id})>"
 
     @classmethod
     def create_table(cls):
+        cursor.execute("DROP TABLE IF EXISTS product")
+        
         cursor.execute('''CREATE TABLE IF NOT EXISTS product (
                             id INTEGER PRIMARY KEY,
                             name TEXT NOT NULL,
@@ -67,6 +80,16 @@ class Product:
         product.save()
         
         return product
+
+    @classmethod
+    def get_all(cls):
+        cursor.execute("SELECT * FROM product")
+        rows = cursor.fetchall()
+        products = []
+        for row in rows:
+            product = Product(row[1], row[2], row[3], row[0])
+            products.append(product)
+        return products
 
 def initialize_db():
     Category.create_table()

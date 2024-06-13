@@ -1,4 +1,4 @@
-from __init__ import conn, cursor
+from lib import conn, cursor
 
 class Product:
     def __init__(self, name, price, category_id):
@@ -20,18 +20,21 @@ class Product:
                         )''')
         conn.commit()
 
-    def save(self):
+    def save(self, name, price, category_id):
+        self.name = name
+        self.price = price
+        self.category_id = category_id
+
         sql = '''
             INSERT INTO product (name, price, category_id) VALUES (?, ?, ?);
         '''
         cursor.execute(sql, (self.name, self.price, self.category_id))
         conn.commit()
-        
+
         self.id = cursor.lastrowid
-        
+
     @classmethod
     def create(cls, name, price, category_id):
         product = cls(name, price, category_id)
         product.save()
-        
         return product
