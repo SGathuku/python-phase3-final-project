@@ -1,3 +1,4 @@
+# display.py
 from lib.liquor_store import Category, Product
 
 def display_data():

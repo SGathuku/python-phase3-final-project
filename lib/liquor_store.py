@@ -1,3 +1,4 @@
+# liquor_store.py
 from lib import conn, cursor
 
 class Category:
@@ -41,6 +42,19 @@ class Category:
             category = Category(row[1], row[0])
             categories.append(category)
         return categories
+
+    @classmethod
+    def display_all(cls):
+        cursor.execute("SELECT * FROM category")
+        rows = cursor.fetchall()
+        for row in rows:
+            print(f"ID: {row[0]}, Name: {row[1]}")
+
+    @classmethod
+    def delete_by_id(cls, id):
+        sql = "DELETE FROM category WHERE id = ?"
+        cursor.execute(sql, (id,))
+        conn.commit()
 
 class Product:
     def __init__(self, name, price, category_id, id=None):
@@ -91,10 +105,37 @@ class Product:
             products.append(product)
         return products
 
+    @classmethod
+    def get_by_name(cls, name):
+        sql = "SELECT * FROM product WHERE name = ?"
+        cursor.execute(sql, (name,))
+        row = cursor.fetchone()
+        if row:
+            return Product(row[1], row[2], row[3], row[0])
+        else:
+            return None
+
+    @classmethod
+    def get_by_id(cls, id):
+        sql = "SELECT * FROM product WHERE id = ?"
+        cursor.execute(sql, (id,))
+        row = cursor.fetchone()
+        if row:
+            return Product(row[1], row[2], row[3], row[0])
+        else:
+            return None
+
+    @classmethod
+    def delete_by_id(cls, id):
+        sql = "DELETE FROM product WHERE id = ?"
+        cursor.execute(sql, (id,))
+        conn.commit()
+
 def initialize_db():
     Category.create_table()
     Product.create_table()
 
+    # Sample data initialization
     liquor_tables = [
         ("Beer", "Tusker", 2.5),
         ("Beer", "Tusker Lite", 2.7),

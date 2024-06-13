@@ -18,6 +18,10 @@ def main():
             search_by_id()
         elif choice == "5":
             search_by_name()
+        elif choice == "6":
+            delete_by_id()
+        elif choice == "7":
+            delete_by_name()
         else:
             print("Invalid choice")
 
@@ -29,10 +33,11 @@ def menu():
     print("3. Enter category of liquor")
     print("4. Search liquor by ID")
     print("5. Search liquor by name")
+    print("6. Delete liquor by ID")
+    print("7. Delete liquor by name")
 
 def enter_name():
     name = input("Enter the name of the liquor: ")
-    # Create a new product instance and save it
     category_id = select_category()
     if category_id:
         product = Product.create(name, 0.0, category_id)
@@ -54,7 +59,6 @@ def enter_price():
 
 def enter_category():
     category = input("Enter the category of the liquor: ")
-    # Create a new category instance and save it
     category = Category.create(category)
     print(f"Category '{category.name}' created with ID {category.id}")
 
@@ -74,10 +78,27 @@ def search_by_name():
     else:
         print(f"No product found with name '{product_name}'")
 
+def delete_by_id():
+    product_id = input("Enter the ID of the product to delete: ")
+    product = Product.get_by_id(product_id)
+    if product:
+        Product.delete_by_id(product_id)
+        print(f"Product with ID {product_id} has been deleted.")
+    else:
+        print(f"No product found with ID {product_id}")
+
+def delete_by_name():
+    product_name = input("Enter the name of the product to delete: ")
+    product = Product.get_by_name(product_name)
+    if product:
+        Product.delete_by_id(product.id)
+        print(f"Product with name '{product_name}' has been deleted.")
+    else:
+        print(f"No product found with name '{product_name}'")
+
 def select_category():
-    Category.display_all()  # Assuming a method to display all categories
+    Category.display_all()
     category_id = input("Enter the ID of the category: ")
-    # Validate category ID here if needed
     return category_id
 
 if __name__ == "__main__":
