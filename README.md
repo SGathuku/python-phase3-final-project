@@ -25,19 +25,13 @@ git clone https://github.com/SGathuku/python-phase3-final-project.git
 
 or by downloading a ZIP file of the code.
 
-2.Create the SQLite database:
-
-```sh
-sqlite3 liquor_store.db < schema.sql
-```
-
-3.Install any required Python packages (if any):
+2.Install any required Python packages (if any):
 
 ``` python
 pipenv install
 ```
 
-4.Run the CLI:
+3.Run the CLI:
 
 ```sh
 python -m lib/cli.py
