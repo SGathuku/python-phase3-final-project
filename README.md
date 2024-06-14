@@ -7,7 +7,7 @@ By  **Gathuku Samwel**
 ## Project Description
 
 * The Liquor Store Management System is a command-line application designed to help manage the inventory of a liquor store.
-* This simple and user-friendly tool allows users to enter details about liquors, including their names, prices, and categories, and stores this information in an SQLite database for persistent storage.
+* This simple and user-friendly tool allows users to enter and delete details about liquors, including their names, prices, and categories, and stores this information in an SQLite database for persistent storage.
 * The system provides a menu-driven interface where users can easily add new liquor entries and update existing ones. This project is ideal for small liquor store owners or managers who need an efficient way to keep track of their stock.
 
 ### Requirements
@@ -40,19 +40,42 @@ pipenv install
 4.Run the CLI:
 
 ```sh
-python app/cli.py
+python -m lib/cli.py
 ```
 
 ## Features
 
--**Add Liquor Name**: Allows the user to enter and store the name of a liquor.
--**Add Liquor Price**: Allows the user to enter and store the price of a liquor.
--**Add Liquor Category**: Allows the user to enter and store the category of a liquor.
--**Persistent Storage**: Stores all entered data persistently in an SQLite database.
--**Menu-Driven Interface**: Provides a simple and intuitive menu-driven interface for users to interact with the system.
--**Data Validation**: Ensures that the input data (such as price) is of the correct type.
--**Update Existing Entries**: Allows users to update the price and category of the most recently entered liquor.
--**Exit Program**: Allows users to exit the program gracefully, ensuring that all data is saved and the database connection is closed properly.
+1.Initialize Database: Create tables for categories and products, and populate them with sample data.
+
+2.Add Liquor Details:
+
+*Add Liquor Name: Allows the user to enter and store the name of a liquor.
+
+*Add Liquor Price: Allows the user to enter and store the price of a liquor.
+
+*Add Liquor Category: Allows the user to enter and store the category of a liquor.
+
+3.Persistent Storage: Stores all entered data persistently in an SQLite database.
+
+4.Menu-Driven Interface: Provides a simple and intuitive menu-driven interface for users to interact with the system.
+
+5.Data Validation: Ensures that the input data (such as price) is of the correct type.
+
+6.Update Existing Entries: Allows users to update the price and category of the most recently entered liquor.
+
+7.Search Product:
+
+*Search Product by ID: Search for a product in the database by its ID.
+
+*Search Product by Name: Search for a product in the database by its name.
+
+8.Delete Product:
+
+*Delete Product by ID: Delete a product from the database using its ID.
+
+*Delete Product by Name: Delete a product from the database using its name.
+
+9.Exit Program: Allows users to exit the program gracefully, ensuring that all data is saved and the database connection is closed properly.
 
 ## Technologies Used
 
@@ -88,5 +111,4 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+SOFTWARE
